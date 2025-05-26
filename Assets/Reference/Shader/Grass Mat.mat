@@ -63,7 +63,7 @@ Material:
     - _AffectDistance: 20
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RotateAmount: 90
+    - _RotateAmount: 80
     - _WindSpeed: 0.2
     - _WindStrength: 0.5
     m_Colors:
