@@ -6,7 +6,8 @@ public class Grass : MonoBehaviour
     Material grassMat;
     public MeshRenderer meshRenderer;
     List<Transform> entities = new List<Transform>();
-    //bool emptyList = true;
+    bool emptyList = true;
+    public float pos = 0f;
 
     private void Awake()
     {
@@ -17,20 +18,24 @@ public class Grass : MonoBehaviour
     {
         if (entities.Count <= 0)
         {
-            /*if (!emptyList)
+            if (!emptyList)
             {
-                grassMat.SetVector("_Pos", new Vector3(0f, 1000f, 0f));
-                emptyList = true;
-            }*/
+                Vector3 currentGrassMatPos = grassMat.GetVector("_Pos");
+                grassMat.SetVector("_Pos", currentGrassMatPos + new Vector3(0f, pos, 0f));
+                if (pos >= 50f) emptyList = true;
+                pos += .0025f;
+            }
             return;
         }
+        if (entities[entities.Count - 1] == null) return;
         grassMat.SetVector("_Pos", entities[entities.Count - 1].position);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         entities.Add(other.transform);
-        //emptyList = false;
+        emptyList = false;
+        pos = 0f;
     }
 
     private void OnTriggerExit(Collider other)
